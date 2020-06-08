@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BlockIcon from '@material-ui/icons/Block'
 import Checkbox from '@material-ui/core/Checkbox'
 import IconButton from '@material-ui/core/IconButton'
@@ -9,6 +9,15 @@ import { ListItemText, ListItemSecondaryAction } from '@material-ui/core';
 
 function TodoList(props)
 {
+    const [state, setState] = useState(false)
+
+    const changeCheckbox = (event) => 
+    {
+        setState(!state)
+        props.handleClick(event)
+    }
+
+
     return (
         <List>
 
@@ -23,7 +32,7 @@ function TodoList(props)
             >
                 <Checkbox 
                     value= {index} 
-                    onClick= { props.handleClick } 
+                    onClick= { changeCheckbox } 
                     tabIndex={-1} 
                     checked={ todo.isChecked }/>
                 <ListItemText primary = { todo.name } />
