@@ -1,23 +1,35 @@
 import React, { useState } from 'react';
 import List from '@material-ui/core/list'
+import TextField from '@material-ui/core/TextField';
 
 const TodoStoreInput = (props) => {
     const [input, setInput] = useState('')
 
-    const handleChange = event => setInput(event.target.value)
+    const handleChange = event => 
+        setInput(event.target.value)
 
-    const handleAddItem = () => {
+    const handleAddItem = () => 
+    {
         // event.preventDefault();
         props.storeTodo(input)
         setInput('')
     }
 
     return (
-        <div>
-            <input 
+        <form
+            onSubmit = { event => {
+                event.preventDefault();
+                props.storeTodo(input);
+                setInput('')
+            }}
+        >
+
+
+            <TextField 
                 placeholder = 'Enter new note' 
-                value = {input}
+                
                 onChange = {event => handleChange(event)} 
+                value = {input}
             />
             <button
                 onClick = {handleAddItem}
@@ -25,7 +37,7 @@ const TodoStoreInput = (props) => {
                 Add Todo
                 
             </button>
-        </div>
+        </form>
     )
 }
 
